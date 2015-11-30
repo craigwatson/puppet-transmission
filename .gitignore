@@ -1,0 +1,8 @@
+*.save
+pkg
+runrake.sh
+acceptance.sh
+spec/fixtures
+Gemfile
+Gemfile.lock
+.DS_Store
