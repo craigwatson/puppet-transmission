@@ -22,7 +22,9 @@ This Puppet module installs and configures the `transmission` daemon - the headl
 
 ## Module Description
 
-  * Adds the Transmission PPA from `ppa:transmissionbt/ppa` and installs `transmission-cli`,`transmission-common` and `transmission-daemon` packages
+  * Adds the Transmission PPA from `ppa:transmissionbt/ppa`
+  * Installs `transmission-cli`,`transmission-common` and `transmission-daemon` packages
+  * Downloads and periodically updates blocklists if configured
   * Configures the configuration file for Transmission at `/etc/transmission-daemon/settings.json`
   * Enables and starts the `transmission-daemon` daemon/service
 
@@ -76,7 +78,7 @@ To specify an RPC user/password, set a custom port number for RPC and peer conne
 
 ### Supported Operating Systems
 
-* Ubuntu
+* Ubuntu (tested on 14.04 LTS)
 
 ## Development
 

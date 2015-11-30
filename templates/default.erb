@@ -15,7 +15,7 @@ ENABLE_DAEMON=1
 CONFIG_DIR="/var/lib/transmission-daemon/info"
 
 # Default options for daemon, see transmission-daemon(1) for more options
-OPTIONS="--config-dir $CONFIG_DIR<% if scope['::transmission::log_file'] != 'undef' -%> --logfile <%= scope['::transmission::log_file'] %><% end -%>"
+OPTIONS="--config-dir $CONFIG_DIR<% if scope['::transmission::log_file'] -%> --logfile <%= scope['::transmission::log_file'] %><% end -%>"
 
 # (optional) extra options to start-stop-daemon
 #START_STOP_OPTIONS="--iosched idle --nicelevel 10"
