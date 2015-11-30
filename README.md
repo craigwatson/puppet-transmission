@@ -30,13 +30,13 @@ This Puppet module installs and configures the `transmission` daemon - the headl
 
 ## Setup
 
-### Beginning with puppet-transmission
+### Beginning With puppet-transmission
 
 To accept default class parameters (correct in most situations):
 
     include transmission
 
-## Usage
+## Usage Example
 
 To specify an RPC user/password, set a custom port number for RPC and peer connections and enable mandatory encryption for peer connections:
 
