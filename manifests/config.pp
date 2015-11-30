@@ -1,3 +1,20 @@
+# == Class: transmission::config
+#
+# This class handles the main configuration files for the module
+#
+# == Actions:
+#
+# * Deploys configuration files and cron
+#
+# === Authors:
+#
+# Craig Watson <craig@cwatson.org>
+#
+# === Copyright:
+#
+# Copyright (C) Craig Watson
+# Published under the Apache License v2.0
+#
 class transmission::config {
 
   file { '/etc/default/transmission-daemon':

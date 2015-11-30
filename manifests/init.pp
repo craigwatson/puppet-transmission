@@ -1,3 +1,21 @@
+# == Class: transmission
+#
+# Main class containing parameters and validation logic
+#
+# == Actions:
+#
+# * Fails on non-Ubuntu operating systems
+# * Validates passed parameters
+#
+# === Authors:
+#
+# Craig Watson <craig@cwatson.org>
+#
+# === Copyright:
+#
+# Copyright (C) Craig Watson
+# Published under the Apache License v2.0
+#
 class transmission (
   $blocklist_url         = undef,
   $bind_address_ipv4     = '0.0.0.0',

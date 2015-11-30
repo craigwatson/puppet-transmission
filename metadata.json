@@ -1,0 +1,24 @@
+{
+  "name": "CraigWatson1987-transmission",
+  "version": "1.0.0",
+  "author": "Craig Watson",
+  "summary": "Installs and configures the headless component of the Transmission BitTorrent client.",
+  "license": "Apache-2.0",
+  "source": "git://github.com/craigwatson/puppet-transmission.git",
+  "project_page": "https://github.com/craigwatson/puppet-transmission",
+  "issues_url": "https://github.com/craigwatson/puppet-transmission/issues",
+  "description": "Installs and configures the headless component of the Transmission BitTorrent client.",
+  "tags": [ "transmission","torrent","bittorrent"],
+  "dependencies": [
+    { "name": "puppetlabs/stdlib", "version_requirement": ">=3.2.0 <5.0.0" }
+  ],
+  "requirements": [
+    { "name": "puppet", "version_requirement": ">=3.0.0 <5.0.0" }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [ "14.04", "12.04", "10.04" ]
+    }
+  ]
+}

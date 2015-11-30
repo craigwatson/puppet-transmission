@@ -1,3 +1,20 @@
+# == Class: transmission::service
+#
+# Manages the transmission-daemon service and configuration replacement
+#
+# == Actions:
+#
+# None
+#
+# === Authors:
+#
+# Craig Watson <craig@cwatson.org>
+#
+# === Copyright:
+#
+# Copyright (C) Craig Watson
+# Published under the Apache License v2.0
+#
 class transmission::service {
 
   service { 'transmission-daemon':
