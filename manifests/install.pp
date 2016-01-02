@@ -30,7 +30,7 @@ class transmission::install {
     exec { 'download_blocklists':
       command => "/usr/bin/transmission-remote ${::transmission::remote_command_auth} --blocklist-update > /dev/null",
       creates => '/var/lib/transmission-daemon/info/blocklists/blocklist.bin',
-      require => Service['transmission'],
+      require => Service['transmission-daemon'],
     }
   }
 
