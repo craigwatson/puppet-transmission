@@ -18,8 +18,8 @@
 class transmission::service {
 
   service { 'transmission-daemon':
-    ensure => running,
-    enable => true,
+    ensure => $::transmission::service_ensure,
+    enable => $::transmission::service_enable,
   }
 
   exec { 'replace_transmission_config':

@@ -25,6 +25,7 @@ class transmission (
   $encryption            = 1,
   $incomplete_dir        = undef,
   $log_file              = undef,
+  $manage_ppa            = true,
   $message_level         = 2,
   $peer_port             = 51413,
   $peer_port_random_low  = 49152,
@@ -37,6 +38,8 @@ class transmission (
   $rpc_username          = 'transmission',
   $rpc_port              = 9091,
   $rpc_whitelist         = undef,
+  $service_ensure        = running,
+  $service_enable        = true,
   $speed_limit_down      = undef,
   $speed_limit_up        = undef,
   $utp_enabled           = true,
@@ -54,6 +57,7 @@ class transmission (
   validate_numeric($encryption)
   if $incomplete_dir { validate_absolute_path($incomplete_dir) }
   if $log_file { validate_absolute_path($log_file) }
+  validate_bool($manage_ppa)
   validate_numeric($message_level)
   validate_numeric($peer_port)
   validate_numeric($peer_port_random_high)

@@ -4,7 +4,7 @@
 #
 # == Actions:
 #
-# * Adds the Transmission Apt PPA to the system
+# * Conditionally adds the Transmission Apt PPA to the system
 # * Installs packages
 # * Optionally downloads blacklists
 #
@@ -19,11 +19,17 @@
 #
 class transmission::install {
 
-  apt::ppa { 'ppa:transmissionbt/ppa': }
+  if $::transmission::manage_ppa {
+    apt::ppa { 'ppa:transmissionbt/ppa': }
+
+    Package['transmission-cli','transmission-common','transmission-daemon'] {
+      require => Apt::Ppa['ppa:transmissionbt/ppa']
+    }
+
+  }
 
   package { ['transmission-cli','transmission-common','transmission-daemon']:
     ensure  => present,
-    require => Apt::Ppa['ppa:transmissionbt/ppa']
   }
 
   if $::transmission::blocklist_url {
