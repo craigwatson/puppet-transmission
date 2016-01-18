@@ -38,7 +38,7 @@ class transmission (
   $rpc_username          = 'transmission',
   $rpc_port              = 9091,
   $rpc_whitelist         = undef,
-  $service_ensure        = running,
+  $service_ensure        = 'running',
   $service_enable        = true,
   $speed_limit_down      = undef,
   $speed_limit_up        = undef,
@@ -70,6 +70,8 @@ class transmission (
   validate_string($rpc_username)
   validate_numeric($rpc_port)
   if $rpc_whitelist { validate_string($rpc_whitelist) }
+  validate_string($service_ensure)
+  validate_bool($service_enable)
   if $speed_limit_down { validate_numeric($speed_limit_down) }
   if $speed_limit_up { validate_numeric($speed_limit_up) }
   validate_bool($utp_enabled)
@@ -80,7 +82,9 @@ class transmission (
     $rpc_bind = $rpc_bind_address
   }
 
-  if $blocklist_url != undef {
+  if $service_ensure != 'running' {
+    $cron_ensure = absent
+  } elsif $blocklist_url != undef {
     $cron_ensure = present
   } else {
     $cron_ensure = absent
