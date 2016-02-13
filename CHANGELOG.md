@@ -1,5 +1,15 @@
 # Change Log
 
+# 1.1.2
+
+### 2016-02-13 - Bug fix Release
+
+### Class: `transmission::config`
+  * Only notify the `replace_transmission_config` resource if the service should be running
+
+### Class: `transmission::install`
+  * Only download blocklists if the service should be running
+
 # 1.1.1
 
 ### 2016-01-18 - Bug Fix Release

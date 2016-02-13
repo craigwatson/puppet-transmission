@@ -38,7 +38,12 @@ class transmission::config {
     group   => 'debian-transmission',
     mode    => '0600',
     content => template('transmission/settings.json.erb'),
-    notify  => Exec['replace_transmission_config'],
+  }
+
+  if $::transmission::service_ensure == 'running' {
+    File['/etc/transmission-daemon/settings.json.puppet'] {
+      notify => Exec['replace_transmission_config'],
+    }
   }
 
   cron { 'transmission_update_blocklist':
