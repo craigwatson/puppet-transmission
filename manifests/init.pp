@@ -84,12 +84,12 @@ class transmission (
 
   validate_legacy('Stdlib::Compat::Absolute_Path', 'validate_absolute_path', $download_dir)
 
-  validate_bool($dht_enabled)
-  validate_bool($manage_ppa)
-  validate_bool($pex_enabled)
-  validate_bool($rpc_enable_auth)
-  validate_bool($service_enable)
-  validate_bool($utp_enabled)
+  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $dht_enabled)
+  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $manage_ppa)
+  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $pex_enabled)
+  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $rpc_enable_auth)
+  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $service_enable)
+  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $utp_enabled)
 
   validate_numeric($encryption)
   validate_numeric($message_level)
