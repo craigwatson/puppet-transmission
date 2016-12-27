@@ -91,12 +91,12 @@ class transmission (
   validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $service_enable)
   validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $utp_enabled)
 
-  validate_numeric($encryption)
-  validate_numeric($message_level)
-  validate_numeric($peer_port)
-  validate_numeric($peer_port_random_high)
-  validate_numeric($peer_port_random_low)
-  validate_numeric($rpc_port)
+  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $encryption)
+  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $message_level)
+  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $peer_port)
+  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $peer_port_random_high)
+  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $peer_port_random_low)
+  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $rpc_port)
 
   validate_string($bind_address_ipv4)
   validate_string($bind_address_ipv6)
