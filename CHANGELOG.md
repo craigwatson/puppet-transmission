@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.1.4
+
+### 2016-12-30 - Bugfix Release
+
+#### Class: `transmission`
+  * Fixing more stdlib deprecation warnings
+
 # 1.1.3
 
 ## 2016-12-30

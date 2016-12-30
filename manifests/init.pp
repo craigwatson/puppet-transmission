@@ -50,11 +50,11 @@ class transmission (
   }
 
   if $blocklist_url != undef {
-    validate_string($blocklist_url)
+    validate_legacy('Stdlib::Compat::String', 'validate_string', $blocklist_url)
   }
 
   if $rpc_bind_address {
-    validate_string($rpc_bind_address)
+    validate_legacy('Stdlib::Compat::String', 'validate_string', $rpc_bind_address)
   }
 
   if $incomplete_dir {
@@ -67,19 +67,19 @@ class transmission (
 
 
   if $rpc_password {
-    validate_string($rpc_password)
+    validate_legacy('Stdlib::Compat::String', 'validate_string', $rpc_password)
   }
 
   if $rpc_whitelist {
-    validate_string($rpc_whitelist)
+    validate_legacy('Stdlib::Compat::String', 'validate_string', $rpc_whitelist)
   }
 
   if $speed_limit_down {
-    validate_numeric($speed_limit_down)
+    validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $speed_limit_down)
   }
 
   if $speed_limit_up {
-    validate_numeric($speed_limit_up)
+    validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $speed_limit_up)
   }
 
   validate_legacy('Stdlib::Compat::Absolute_Path', 'validate_absolute_path', $download_dir)
@@ -98,11 +98,11 @@ class transmission (
   validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $peer_port_random_low)
   validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $rpc_port)
 
-  validate_string($bind_address_ipv4)
-  validate_string($bind_address_ipv6)
-  validate_string($rpc_base_url)
-  validate_string($rpc_username)
-  validate_string($service_ensure)
+  validate_legacy('Stdlib::Compat::String', 'validate_string', $bind_address_ipv4)
+  validate_legacy('Stdlib::Compat::String', 'validate_string', $bind_address_ipv6)
+  validate_legacy('Stdlib::Compat::String', 'validate_string', $rpc_base_url)
+  validate_legacy('Stdlib::Compat::String', 'validate_string', $rpc_username)
+  validate_legacy('Stdlib::Compat::String', 'validate_string', $service_ensure)
 
   if $rpc_bind_address == undef {
     $rpc_bind = $bind_address_ipv4
