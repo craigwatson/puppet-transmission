@@ -1,8 +1,15 @@
 # Change Log
 
+# 1.1.3
+
+## 2016-12-30
+
+### Class: `transmission`
+  * Fixing legacy stdlib deprecation warnings
+
 # 1.1.2
 
-### 2016-02-13 - Bug fix Release
+## 2016-02-13 - Bug fix Release
 
 ### Class: `transmission::config`
   * Only notify the `replace_transmission_config` resource if the service should be running
