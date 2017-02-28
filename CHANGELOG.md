@@ -1,18 +1,14 @@
 # Change Log
 
-## 1.2.1
-
-### 2017-02-28 - Bugfix Release
-
-#### Module-wide: Permissions issues
- * Fixes some permissions issues as reported in [#1](https://github.com/craigwatson/puppet-transmission/issues/1)
-
 ## 1.2.0
 
 ### 2017-02-28 - Minor Version Release
 
 #### Puppet 3 Deprecation
   * As of this release, Puppet 3.x functionality is deprecated. The next release (2.0.0) will *not* be compatible with Puppet 3.x.
+
+#### Module-wide: Permissions issues
+ * Fixes some permissions issues as reported in [#1](https://github.com/craigwatson/puppet-transmission/issues/1)
 
 ## 1.1.4
 
