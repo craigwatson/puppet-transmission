@@ -20,6 +20,14 @@
 
 This Puppet module installs and configures the `transmission` daemon - the headless component of the Transmission BitTorrent client.
 
+## Puppet 3 Support
+
+**Please note that the master branch of this module does not support Puppet 3!**
+
+On 31st December 2006, support for Puppet 3.x was withdrawn. As such, this module no longer supports Puppet 3, and is actively being migrated to Puppet 4 syntax.
+
+If you require Puppet 3 compatibility, please use version [1.2.1 from the Puppet Forge](https://forge.puppet.com/CraigWatson1987/transmission/readme), or the [puppet3](https://github.com/craigwatson/puppet-transmission/tree/puppet3) branch in Git.
+
 ## Module Description
 
   * Adds the Transmission PPA from `ppa:transmissionbt/ppa`

@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.0.0
+
+### TBC - Major Version Release
+
+#### Puppet 3 Support Removed
+  * This module no longer supports Puppet 3. If you require Puppet 3 functionality, please use version [1.2.1 from the Puppet Forge](https://forge.puppet.com/CraigWatson1987/transmission/readme), or the [puppet3](https://github.com/craigwatson/puppet-transmission/tree/puppet3) branch in Git.
+
 ## 1.2.1
 
 ### 2017-02-28 - Minor Version Release

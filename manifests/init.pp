@@ -17,111 +17,56 @@
 # Published under the Apache License v2.0
 #
 class transmission (
-  $blocklist_url         = undef,
-  $bind_address_ipv4     = '0.0.0.0',
-  $bind_address_ipv6     = '::',
-  $dht_enabled           = true,
-  $download_dir          = '/var/lib/transmission-daemon/downloads',
-  $encryption            = 1,
-  $incomplete_dir        = undef,
-  $log_file              = undef,
-  $manage_ppa            = true,
-  $message_level         = 2,
-  $peer_port             = 51413,
-  $peer_port_random_low  = 49152,
-  $peer_port_random_high = 65535,
-  $pex_enabled           = true,
-  $rpc_base_url          = '/transmission/',
-  $rpc_bind_address      = undef,
-  $rpc_enable_auth       = true,
-  $rpc_password          = undef,
-  $rpc_username          = 'transmission',
-  $rpc_port              = 9091,
-  $rpc_whitelist         = undef,
-  $service_ensure        = 'running',
-  $service_enable        = true,
-  $speed_limit_down      = undef,
-  $speed_limit_up        = undef,
-  $utp_enabled           = true,
+  Variant[Undef,String]  $blocklist_url         = undef,
+  String                 $bind_address_ipv4     = '0.0.0.0',
+  String                 $bind_address_ipv6     = '::',
+  Boolean                $dht_enabled           = true,
+  String                 $download_dir          = '/var/lib/transmission-daemon/downloads',
+  Integer                $encryption            = 1,
+  Variant[Undef,String]  $incomplete_dir        = undef,
+  Variant[Undef,String]  $log_file              = undef,
+  Boolean                $manage_ppa            = true,
+  Integer                $message_level         = 2,
+  Integer                $peer_port             = 51413,
+  Integer                $peer_port_random_low  = 49152,
+  Integer                $peer_port_random_high = 65535,
+  Boolean                $pex_enabled           = true,
+  String                 $rpc_base_url          = '/transmission/',
+  Variant[Undef,String]  $rpc_bind_address      = undef,
+  Boolean                $rpc_enable_auth       = true,
+  String                 $rpc_password          = undef,
+  String                 $rpc_username          = 'transmission',
+  Integer                $rpc_port              = 9091,
+  Variant[Undef,String]  $rpc_whitelist         = undef,
+  String                 $service_ensure        = 'running',
+  Boolean                $service_enable        = true,
+  Variant[Undef,Integer] $speed_limit_down      = undef,
+  Variant[Undef,Integer] $speed_limit_up        = undef,
+  Boolean                $utp_enabled           = true,
 ) {
 
   if $::osfamily != 'Debian' {
     fail "Your osfamily (${::osfamily}) is not supported by this module"
   }
 
-  if $blocklist_url != undef {
-    validate_legacy('Stdlib::Compat::String', 'validate_string', $blocklist_url)
-  }
-
-  if $rpc_bind_address {
-    validate_legacy('Stdlib::Compat::String', 'validate_string', $rpc_bind_address)
-  }
-
-  if $incomplete_dir {
-    validate_legacy('Stdlib::Compat::Absolute_Path', 'validate_absolute_path', $incomplete_dir)
-  }
-
-  if $log_file {
-    validate_legacy('Stdlib::Compat::Absolute_Path', 'validate_absolute_path', $log_file)
-  }
-
-
-  if $rpc_password {
-    validate_legacy('Stdlib::Compat::String', 'validate_string', $rpc_password)
-  }
-
-  if $rpc_whitelist {
-    validate_legacy('Stdlib::Compat::String', 'validate_string', $rpc_whitelist)
-  }
-
-  if $speed_limit_down {
-    validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $speed_limit_down)
-  }
-
-  if $speed_limit_up {
-    validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $speed_limit_up)
-  }
-
-  validate_legacy('Stdlib::Compat::Absolute_Path', 'validate_absolute_path', $download_dir)
-
-  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $dht_enabled)
-  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $manage_ppa)
-  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $pex_enabled)
-  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $rpc_enable_auth)
-  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $service_enable)
-  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $utp_enabled)
-
-  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $encryption)
-  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $message_level)
-  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $peer_port)
-  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $peer_port_random_high)
-  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $peer_port_random_low)
-  validate_legacy('Stdlib::Compat::Numeric','validate_numeric', $rpc_port)
-
-  validate_legacy('Stdlib::Compat::String', 'validate_string', $bind_address_ipv4)
-  validate_legacy('Stdlib::Compat::String', 'validate_string', $bind_address_ipv6)
-  validate_legacy('Stdlib::Compat::String', 'validate_string', $rpc_base_url)
-  validate_legacy('Stdlib::Compat::String', 'validate_string', $rpc_username)
-  validate_legacy('Stdlib::Compat::String', 'validate_string', $service_ensure)
-
-  if $rpc_bind_address == undef {
-    $rpc_bind = $bind_address_ipv4
+  if $::transmission::rpc_bind_address != undef {
+    $rpc_bind = $::transmission::rpc_bind_address
   } else {
-    $rpc_bind = $rpc_bind_address
+    $rpc_bind = $::transmission::bind_address_ipv4
   }
 
-  if $service_ensure != 'running' {
+  if $::transmission::service_ensure != 'running' {
     $cron_ensure = absent
-  } elsif $blocklist_url != undef {
+  } elsif $::transmission::blocklist_url != undef {
     $cron_ensure = present
   } else {
     $cron_ensure = absent
   }
 
-  if $rpc_enable_auth == false {
-    $remote_command_auth = ''
-  } else {
+  if $::transmission::rpc_enable_auth == true {
     $remote_command_auth = "-n ${::transmission::rpc_username}:${::transmission::rpc_password}"
+  } else {
+    $remote_command_auth = ''
   }
 
   include ::transmission::install
