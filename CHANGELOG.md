@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.2.0
+## 1.2.1
 
 ### 2017-02-28 - Minor Version Release
 
