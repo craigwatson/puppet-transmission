@@ -8,7 +8,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    CFPropertyList (2.2.8)
+    CFPropertyList (2.3.5)
     addressable (2.4.0)
     aws-sdk-v1 (1.66.0)
       json (~> 1.4)
@@ -58,7 +58,6 @@ GEM
       ffi (>= 1.3.0)
     excon (0.54.0)
     facter (2.4.6)
-      CFPropertyList (~> 2.2.6)
     faraday (0.10.0)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.1)
@@ -228,8 +227,7 @@ GEM
     guard-rake (1.0.0)
       guard
       rake
-    hiera (1.3.4)
-      json_pure
+    hiera (3.3.0)
     highline (1.7.8)
     hocon (1.2.4)
     http-cookie (1.0.3)
@@ -240,8 +238,8 @@ GEM
     inflecto (0.0.2)
     inifile (2.0.2)
     ipaddress (0.8.3)
-    json (1.8.3)
-    json_pure (1.8.3)
+    json (1.8.6)
+    json_pure (1.8.6)
     jwt (1.5.6)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -284,10 +282,10 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puppet (3.8.7)
-      facter (> 1.6, < 3)
-      hiera (~> 1.0)
-      json_pure
+    puppet (4.6.2)
+      facter (> 2.0, < 4)
+      hiera (>= 2.0, < 4)
+      json_pure (~> 1.8)
     puppet-blacksmith (3.4.0)
       puppet (>= 2.7.16)
       rest-client (~> 1.8.0)
@@ -388,7 +386,7 @@ DEPENDENCIES
   guard-rake
   json (< 2.0.0)
   json_pure (< 2.0.0)
-  puppet (~> 3.8.7)
+  puppet (~> 4.6.1)
   puppet-blacksmith
   puppet-lint (= 2.0.2)
   puppet-syntax
@@ -401,4 +399,4 @@ DEPENDENCIES
   vagrant-wrapper
 
 BUNDLED WITH
-   1.12.4
+   1.14.6
