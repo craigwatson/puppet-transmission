@@ -1,9 +1,9 @@
 class transmission::params {
 
   $packages = [
-    'transmission-cli'
-    'transmission-common'
-    'transmission-daemon'
+    'transmission-cli',
+    'transmission-common',
+    'transmission-daemon',
   ]
 
   if $::facts['os']['operatingsystemrelease'] == '16.04' {
