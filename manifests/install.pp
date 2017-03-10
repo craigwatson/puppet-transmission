@@ -22,13 +22,13 @@ class transmission::install {
   if $::transmission::manage_ppa {
     apt::ppa { 'ppa:transmissionbt/ppa': }
 
-    Package['transmission-cli','transmission-common','transmission-daemon'] {
+    Package[$::transmission::params::packages] {
       require => Apt::Ppa['ppa:transmissionbt/ppa']
     }
 
   }
 
-  package { ['transmission-cli','transmission-common','transmission-daemon']:
+  package { $::transmission::params::packages:
     ensure  => present,
   }
 

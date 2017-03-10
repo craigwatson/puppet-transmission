@@ -17,27 +17,19 @@
 #
 class transmission::config {
 
-  file { '/etc/default/transmission-daemon':
-    ensure  => file,
-    content => template('transmission/default.erb'),
-    require => Package['transmission-daemon'],
-    notify  => Service['transmission-daemon'],
-  }
+  # == Defaults
 
-  file { '/etc/transmission-daemon':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'debian-transmission',
-    mode    => 'u=rwx,g=rwxs,o=rx',
-    require => Package['transmission-cli','transmission-common','transmission-daemon'],
-  }
-
-  file { '/etc/transmission-daemon/settings.json.puppet':
-    ensure  => file,
+  File {
     owner   => 'debian-transmission',
     group   => 'debian-transmission',
-    mode    => '0600',
-    content => template('transmission/settings.json.erb'),
+    require => Package[$::transmission::params::packages],
+  }
+
+  # == Transmission config
+
+  file { '/etc/transmission-daemon':
+    ensure => directory,
+    mode   => '0770',
   }
 
   if $::transmission::params::service_ensure == 'running' {
@@ -45,6 +37,40 @@ class transmission::config {
       notify => Exec['replace_transmission_config'],
     }
   }
+
+  file { '/etc/transmission-daemon/settings.json.puppet':
+    ensure  => file,
+    mode    => '0600',
+    content => template('transmission/settings.json.erb'),
+    require => File['/etc/transmission-daemon'],
+  }
+
+  # == Transmission Home
+
+  file { $::trasmission::params::home_dir:
+    ensure => directory,
+    mode   => '0770',
+  }
+
+  file { "${::trasmission::params::home_dir}/.config":
+    ensure  => directory,
+    require => File[$::trasmission::params::home_dir],
+    mode    => '0770',
+  }
+
+  file { "${::trasmission::params::home_dir}/.config/transmission-daemon":
+    ensure  => directory,
+    mode    => '0770',
+    require => File["${::trasmission::params::home_dir}/.config"],
+  }
+
+  file { "${::trasmission::params::home_dir}/.config/transmission-daemon/settings.json":
+    ensure  => link,
+    target  => '/etc/transmission-daemon/settings.json',
+    require => File["${::trasmission::params::home_dir}/.config/transmission-daemon"],
+  }
+
+  # == Blocklist update cron
 
   cron { 'transmission_update_blocklist':
     ensure  => $::transmission::params::cron_ensure,

@@ -1,5 +1,23 @@
 class transmission::params {
 
+  $packages = [
+    'transmission-cli'
+    'transmission-common'
+    'transmission-daemon'
+  ]
+
+  if $::facts['os']['operatingsystemrelease'] == '16.04' {
+    $use_systemd = true
+    $home_dir    = '/home/debian-transmission'
+    $stop_cmd    = '/bin/systemctl stop transmission-daemon'
+    $start_cmd   = '/bin/systemctl start transmission-daemon'
+  } else {
+    $use_systemd = false
+    $home_dir    = '/var/lib/transmission-daemon'
+    $stop_cmd    = '/usr/sbin/service transmission-daemon stop'
+    $start_cmd   = '/usr/sbin/service transmission-daemon start'
+  }
+
   if $::transmission::rpc_bind_address != undef {
     $rpc_bind = $::transmission::rpc_bind_address
   } else {
