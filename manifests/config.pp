@@ -40,15 +40,15 @@ class transmission::config {
     content => template('transmission/settings.json.erb'),
   }
 
-  if $::transmission::service_ensure == 'running' {
+  if $::transmission::params::service_ensure == 'running' {
     File['/etc/transmission-daemon/settings.json.puppet'] {
       notify => Exec['replace_transmission_config'],
     }
   }
 
   cron { 'transmission_update_blocklist':
-    ensure  => $::transmission::cron_ensure,
-    command => "/usr/bin/transmission-remote ${::transmission::remote_command_auth} --blocklist-update > /dev/null",
+    ensure  => $::transmission::params::cron_ensure,
+    command => "/usr/bin/transmission-remote ${::transmission::params::remote_command_auth} --blocklist-update > /dev/null",
     require => Package['transmission-cli','transmission-common','transmission-daemon'],
     user    => 'root',
     minute  => '0',

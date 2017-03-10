@@ -54,7 +54,7 @@
     "ratio-limit-enabled": false,
     "rename-partial-files": true,
     "rpc-authentication-required": <%= scope['::transmission::rpc_enable_auth'] %>,
-    "rpc-bind-address": "<%= scope['::transmission::rpc_bind'] %>",
+    "rpc-bind-address": "<%= scope['::transmission::params::rpc_bind'] %>",
     "rpc-enabled": true,
 <% if scope['::transmission::rpc_password'] -%>
     "rpc-password": "<%= scope['::transmission::rpc_password'] %>",
