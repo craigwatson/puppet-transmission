@@ -17,6 +17,11 @@
 #
 class transmission::service {
 
+  exec { 'replace_transmission_config':
+    command     => "${::transmission::params::stop_cmd} && cp -a /etc/transmission-daemon/settings.json.puppet /etc/transmission-daemon/settings.json && ${::transmission::params::start_cmd}",
+    refreshonly => true,
+  }
+
   if $::transmission::params::use_systemd == true {
 
     file { '/etc/systemd/system/transmission-daemon.service':
@@ -45,14 +50,19 @@ class transmission::service {
     }
   }
 
+  if $::transmission::params::service_ensure == 'running' {
+    File <| title == '/etc/transmission-daemon/settings.json.puppet' |> {
+      notify => Exec['replace_transmission_config'],
+    }
+
+    Exec <| title == 'transmission_download_blocklists' |> {
+      require => Exec['replace_transmission_config'],
+    }
+  }
+
   service { 'transmission-daemon':
     ensure => $::transmission::service_ensure,
     enable => $::transmission::service_enable,
-  }
-
-  exec { 'replace_transmission_config':
-    command     => "${::transmission::params::stop_cmd} && cp -a /etc/transmission-daemon/settings.json.puppet /etc/transmission-daemon/settings.json && ${::transmission::params::start_cmd}",
-    refreshonly => true,
   }
 
 }

@@ -32,12 +32,6 @@ class transmission::config {
     mode   => '0770',
   }
 
-  if $::transmission::params::service_ensure == 'running' {
-    File['/etc/transmission-daemon/settings.json.puppet'] {
-      notify => Exec['replace_transmission_config'],
-    }
-  }
-
   file { '/etc/transmission-daemon/settings.json.puppet':
     ensure  => file,
     mode    => '0600',
