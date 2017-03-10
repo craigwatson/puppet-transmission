@@ -35,7 +35,7 @@ class transmission::install {
   if $::transmission::blocklist_url and $::transmission::params::service_ensure != 'running' {
     exec { 'download_blocklists':
       command => "/usr/bin/transmission-remote ${::transmission::params::remote_command_auth} --blocklist-update > /dev/null",
-      creates => '/var/lib/transmission-daemon/info/blocklists/blocklist.bin',
+      creates => "${::transmission::params::home_dir}/blocklists/blocklist.bin",
       require => Service['transmission-daemon'],
     }
   }
