@@ -30,7 +30,7 @@ class transmission::service {
       command     => '/bin/systemctl daemon-reload',
       refreshonly => true,
       require     => File['/etc/systemd/system/transmission-daemon.service'],
-      notify      => Service['varnish'],
+      notify      => Service['transmission-daemon'],
     }
 
     Service['transmission-daemon']{
