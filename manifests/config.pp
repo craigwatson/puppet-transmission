@@ -52,22 +52,10 @@ class transmission::config {
     mode   => '0770',
   }
 
-  file { "${::transmission::params::home_dir}/.config":
-    ensure  => directory,
-    require => File[$::transmission::params::home_dir],
-    mode    => '0770',
-  }
-
-  file { "${::transmission::params::home_dir}/.config/transmission-daemon":
-    ensure  => directory,
-    mode    => '0770',
-    require => File["${::transmission::params::home_dir}/.config"],
-  }
-
-  file { "${::transmission::params::home_dir}/.config/transmission-daemon/settings.json":
+  file { "${::transmission::params::home_dir}/settings.json":
     ensure  => link,
     target  => '/etc/transmission-daemon/settings.json',
-    require => File["${::transmission::params::home_dir}/.config/transmission-daemon"],
+    require => File[$::transmission::params::home_dir],
   }
 
   # == Blocklist update cron
