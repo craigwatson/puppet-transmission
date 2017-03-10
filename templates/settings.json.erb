@@ -26,10 +26,10 @@
     "idle-seeding-limit": 30,
     "idle-seeding-limit-enabled": false,
 <% if scope['::transmission::incomplete_dir'] -%>
-    "incomplete-dir": "<%= scope['::transmission::incomplete_dir'] %>",
+    "incomplete-dir": "<%= scope['::transmission::params::home_dir'] %>/<%= scope['::transmission::incomplete_dir'] %>",
     "incomplete-dir-enabled": true,
 <% else -%>
-    "incomplete-dir": "/var/lib/transmission-daemon/downloads",
+    "incomplete-dir": "<%= scope['::transmission::params::home_dir'] %>/downloads",
     "incomplete-dir-enabled": false,
 <% end -%>
     "lpd-enabled": false,
