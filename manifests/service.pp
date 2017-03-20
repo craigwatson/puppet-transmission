@@ -50,10 +50,11 @@ class transmission::service {
     }
   }
 
-  if $::transmission::params::service_ensure == 'running' {
+  if $::transmission::service_ensure == 'running' {
     File <| title == '/etc/transmission-daemon/settings.json.puppet' |> {
       notify => Exec['replace_transmission_config'],
     }
+
 
     Exec <| title == 'transmission_download_blocklists' |> {
       require => Exec['replace_transmission_config'],
