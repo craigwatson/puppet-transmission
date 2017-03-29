@@ -20,7 +20,7 @@
     "download-dir": "<%= scope['::transmission::params::home_dir'] %>/<%= scope['::transmission::download_dir'] %>",
     "download-limit": 100,
     "download-limit-enabled": 0,
-<% if scope['::transmission::blocklist_url'] -%>
+<% if scope['::transmission::download_queue_size'] -%>
     "download-queue-enabled": true,
     "download-queue-size": <%= scope['::transmission::download_queue_size'] %>,
 <% else -%>
