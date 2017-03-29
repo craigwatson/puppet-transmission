@@ -17,11 +17,16 @@
 <% end -%>
     "cache-size-mb": 4,
     "dht-enabled": <%= scope['::transmission::dht_enabled'] %>,
-    "download-dir": "<%= scope['::transmission::download_dir'] %>",
+    "download-dir": "<%= scope['::transmission::params::home_dir'] %>/<%= scope['::transmission::download_dir'] %>",
     "download-limit": 100,
     "download-limit-enabled": 0,
+<% if scope['::transmission::blocklist_url'] -%>
     "download-queue-enabled": true,
+    "download-queue-size": <%= scope['::transmission::download_queue_size'] %>,
+<% else -%>
+    "download-queue-enabled": false,
     "download-queue-size": 5,
+<% end -%>
     "encryption": <%= scope['::transmission::encryption'] %>,
     "idle-seeding-limit": 30,
     "idle-seeding-limit-enabled": false,
@@ -29,7 +34,7 @@
     "incomplete-dir": "<%= scope['::transmission::params::home_dir'] %>/<%= scope['::transmission::incomplete_dir'] %>",
     "incomplete-dir-enabled": true,
 <% else -%>
-    "incomplete-dir": "<%= scope['::transmission::params::home_dir'] %>/downloads",
+    "incomplete-dir": "<%= scope['::transmission::params::home_dir'] %>/<%= scope['::transmission::download_dir'] %>",
     "incomplete-dir-enabled": false,
 <% end -%>
     "lpd-enabled": false,
@@ -50,8 +55,13 @@
     "prefetch-enabled": 1,
     "queue-stalled-enabled": true,
     "queue-stalled-minutes": 30,
+<% if scope['::transmission::ratio_limit'] -%>
+    "ratio-limit": <%= scope['::transmission::ratio_limit'] %>,
+    "ratio-limit-enabled": true,
+<% else -%>
     "ratio-limit": 2,
     "ratio-limit-enabled": false,
+<% end -%>
     "rename-partial-files": true,
     "rpc-authentication-required": <%= scope['::transmission::rpc_enable_auth'] %>,
     "rpc-bind-address": "<%= scope['::transmission::params::rpc_bind'] %>",
@@ -85,7 +95,7 @@
 <% end -%>
 <% if scope['::transmission::speed_limit_up'] -%>
     "speed-limit-up": <%= scope['::transmission::speed_limit_up'] %>,
-    "speed-limit-up-enabled": false,
+    "speed-limit-up-enabled": true,
 <% else -%>
     "speed-limit-up": 100,
     "speed-limit-up-enabled": false,

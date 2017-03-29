@@ -2,17 +2,20 @@
 
 ## 2.1.0
 
-### 2017-03-20 - Feature Release
+### TBC - Feature Release
+
+#### Class: `transmission`
+  * Adding some more parameters into the main class
 
 #### Class: `transmission::params`
-  * New class to hold computed variables
+  * Creating new class to hold internally-derived parameters
 
 #### Class: `transmission::service`
-  * Now supports systemd on Ubuntu 16.04
+  * Adding systemd service files for Ubuntu 16.04
 
 ## 2.0.0
 
-### 2017-03-10 - Major Version Release
+### 2017-02-28 - Major Version Release
 
 #### Puppet 3 Support Removed
   * This module no longer supports Puppet 3. If you require Puppet 3 functionality, please use version [1.2.1 from the Puppet Forge](https://forge.puppet.com/CraigWatson1987/transmission/readme), or the [puppet3](https://github.com/craigwatson/puppet-transmission/tree/puppet3) branch in Git.
@@ -25,7 +28,7 @@
   * As of this release, Puppet 3.x functionality is deprecated. The next release (2.0.0) will *not* be compatible with Puppet 3.x.
 
 #### Module-wide: Permissions issues
- * Fixes some permissions issues as reported in [#1](https://github.com/craigwatson/puppet-transmission/issues/1)
+  * Fixes some permissions issues as reported in [#1](https://github.com/craigwatson/puppet-transmission/issues/1)
 
 ## 1.1.4
 
