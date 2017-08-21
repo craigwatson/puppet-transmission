@@ -47,8 +47,8 @@ class transmission (
   Boolean                $utp_enabled           = true,
 ) {
 
-  if $::osfamily != 'Debian' {
-    fail "Your osfamily (${::osfamily}) is not supported by this module"
+  if $facts['os']['family'] != 'Debian' {
+    fail "Your osfamily (${facts[os][family]}) is not supported by this module"
   }
 
   include ::transmission::params
