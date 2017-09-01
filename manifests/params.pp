@@ -33,7 +33,7 @@ class transmission::params {
   }
 
   if $::transmission::rpc_enable_auth == true {
-    $remote_command_auth = "-n ${::transmission::rpc_username}:${::transmission::rpc_password}"
+    $remote_command_auth = " -n ${::transmission::rpc_username}:${::transmission::rpc_password}"
   } else {
     $remote_command_auth = ' '
   }
