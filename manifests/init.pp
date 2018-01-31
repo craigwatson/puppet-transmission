@@ -40,6 +40,7 @@ class transmission (
   String                 $rpc_username          = 'transmission',
   Integer                $rpc_port              = 9091,
   Variant[Undef,String]  $rpc_whitelist         = undef,
+  Variant[Undef,String]  $script_done_filename  = undef,
   String                 $service_ensure        = 'running',
   Boolean                $service_enable        = true,
   Variant[Undef,Integer] $speed_limit_down      = undef,
