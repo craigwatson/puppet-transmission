@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.2.0
+
+### 2018-01-31 - Feature Release
+
+#### Class: `transmission`
+  * Adding new parameter to enable on-complete scripts
+
 ## 2.1.0
 
 ### 2017-09-01 - Feature Release

@@ -1,6 +1,6 @@
 {
   "name"                    : "CraigWatson1987-transmission",
-  "version"                 : "2.1.0",
+  "version"                 : "2.2.0",
   "author"                  : "Craig Watson",
   "summary"                 : "Installs and configures the headless component of the Transmission BitTorrent client.",
   "license"                 : "Apache-2.0",
