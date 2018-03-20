@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.2.1
+
+#### Template: `systemd.erb`
+  * Transmission 2.93 no longer works with `Type=notify` so switched to `Type=simple` instead
+
 ## 2.2.0
 
 ### 2018-01-31 - Feature Release
