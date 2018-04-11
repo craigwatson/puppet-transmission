@@ -30,9 +30,9 @@ class transmission::params {
     $download_root = $home_dir
   }
 
-  $download_dirs = unique(["$download_root/$::transmission::download_dir",
-                           "$download_root/$::transmission::incomplete_dir",
-                           "$download_root/$::transmission::watch_dir"])
+  $download_dirs = unique(["$download_root/${::transmission::download_dir}",
+                          "$download_root/${::transmission::incomplete_dir}",
+                          "$download_root/${::transmission::watch_dir}"])
 
   if $::transmission::service_ensure != 'running' {
     $cron_ensure = absent
