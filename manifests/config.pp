@@ -52,6 +52,11 @@ class transmission::config {
     require => File[$::transmission::params::home_dir],
   }
 
+  file { $::transmission::params::download_dirs:
+    ensure => directory,
+    mode => '4755',
+  }
+
   # == Blocklist update cron
 
   cron { 'transmission_update_blocklist':
