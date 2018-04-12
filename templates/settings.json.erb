@@ -23,7 +23,11 @@
     "lazy-bitfield-enabled": <%= scope['::transmission::lazy_bitfield_enabled'] %>,
     "lpd-enabled": <%= scope['::transmission::lpd_enabled'] %>,
     "message-level": <%= scope['::transmission::message_level'] %>,
+<% if scope['::transmission::peer_congestion_algorithm'] -%>
     "peer-congestion-algorithm": "<%= scope['::transmission::peer_congestion_algorithm'] %>",
+<% else -%>
+    "peer-congestion-algorithm": "",
+<% end -%>
     "peer-id-ttl-hours": <%= scope['::transmission::peer_id_ttl_hours'] %>,
     "peer-limit-global": <%= scope['::transmission::peer_limit_global'] %>,
     "peer-limit-per-torrent": <%= scope['::transmission::peer_limit_per_torrent'] %>,
@@ -45,7 +49,11 @@
     "rpc-url": "<%= scope['::transmission::rpc_url'] %>",
     "rpc-bind-address": "<%= scope['::transmission::params::rpc_bind_address'] %>",
     "rpc-enabled": <%= scope['::transmission::rpc_enabled'] %>,
+<% if scope['::transmission::rpc-host-whitelist'] -%>
     "rpc-host-whitelist": "<%= scope['::transmission::rpc_host_whitelist'] %>",
+<% else -%>
+    "rpc-host-whitelist": "",
+<% end -%>
     "rpc-host-whitelist-enabled": <%= scope['::transmission::rpc_host_whitelist_enabled'] %>,
     "rpc-password": "<%= scope['::transmission::rpc_password'] %>",
     "rpc-port": <%= scope['::transmission::rpc_port'] %>,
@@ -54,7 +62,11 @@
     "rpc-whitelist-enabled": <%= scope['::transmission::rpc_whitelist_enabled'] %>,
     "scrape-paused-torrents-enabled": <%= scope['::transmission::scrape_paused_torrents_enabled'] %>,
     "script-torrent-done-enabled": <%= scope['::transmission::script_torrent_done_enabled'] %>,
-    "script-torrent-done-filename": "<%= scope['::transmission::script_done_filename'] %>",
+<% if scope['::transmission::script_torrent_done_filename'] -%>
+    "script-torrent-done-filename": "<%= scope['::transmission::script_torrent_done_filename'] %>",
+<% else -%>
+    "script-torrent-done-filename": "",
+<% end -%>
     "start-added-torrents": <%= scope['::transmission::start_added_torrents'] %>,
     "speed-limit-down": <%= scope['::transmission::speed_limit_down'] %>,
     "speed-limit-down-enabled": <%= scope['::transmission::speed_limit_down_enabled'] %>,

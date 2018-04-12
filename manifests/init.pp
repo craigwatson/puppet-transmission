@@ -48,7 +48,7 @@ class transmission (
   Boolean                $lazy_bitfield_enabled          = true,
   Boolean                $lpd_enabled                    = false,
   Integer                $message_level                  = 2,
-  String                 $peer_congestion_algorithm      = '',
+  Variant[Undef,String]  $peer_congestion_algorithm      = undef,
   Integer                $peer_id_ttl_hours              = 6,
   Integer                $peer_limit_global              = 200,            # 240
   Integer                $peer_limit_per_torrent         = 50,             # 60
@@ -70,7 +70,7 @@ class transmission (
   String                 $rpc_url                        = '/transmission/',
   String                 $rpc_bind_address               = '0.0.0.0',
   Boolean                $rpc_enabled                    = true,
-  String                 $rpc_host_whitelist             = '',
+  Variant[Undef,String]  $rpc_host_whitelist             = undef,
   Boolean                $rpc_host_whitelist_enabled     = true,
   String                 $rpc_password                   = 'transmission',
   Integer                $rpc_port                       = 9091,
@@ -79,7 +79,7 @@ class transmission (
   Boolean                $rpc_whitelist_enabled          = true,
   Boolean                $scrape_paused_torrents_enabled = true,
   Boolean                $script_torrent_done_enabled    = false,
-  String                 $script_torrent_done_filename   = '',
+  Variante[Undef,String] $script_torrent_done_filename   = undef,
   Boolean                $start_added_torrents           = true,
   Integer                $speed_limit_down               = 100,
   Boolean                $speed_limit_down_enabled       = false,
