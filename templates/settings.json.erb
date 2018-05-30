@@ -1,115 +1,83 @@
 {
-    "alt-speed-down": 50,
-    "alt-speed-enabled": false,
-    "alt-speed-time-begin": 540,
-    "alt-speed-time-day": 127,
-    "alt-speed-time-enabled": false,
-    "alt-speed-time-end": 1020,
-    "alt-speed-up": 50,
+    "alt-speed-down": <%= scope['::transmission::alt_speed_down'] %>,
+    "alt-speed-enabled": <%= scope['::transmission::alt_speed_enabled'] %>,
+    "alt-speed-up": <%= scope['::transmission::alt_speed_up'] %>,
+    "alt-speed-time-begin": <%= scope['::transmission::alt_speed_time_begin'] %>,
+    "alt-speed-time-day": <%= scope['::transmission::alt_speed_time_day'] %>,
+    "alt-speed-time-enabled": <%= scope['::transmission::alt_speed_time_enabled'] %>,
+    "alt-speed-time-end": <%= scope['::transmission::alt_speed_time_end'] %>,
     "bind-address-ipv4": "<%= scope['::transmission::bind_address_ipv4'] %>",
     "bind-address-ipv6": "<%= scope['::transmission::bind_address_ipv6'] %>",
-<% if scope['::transmission::blocklist_url'] -%>
-    "blocklist-enabled": true,
+    "blocklist-enabled": <%= scope['::transmission::blocklist_enabled'] %>,
     "blocklist-url": "<%= scope['::transmission::blocklist_url'] %>",
-<% else -%>
-    "blocklist-enabled": false,
-    "blocklist-url": "http://www.example.com/blocklist",
-<% end -%>
-    "cache-size-mb": 4,
+    "cache-size-mb": <%= scope['::transmission::cache_size_mb'] %>,
     "dht-enabled": <%= scope['::transmission::dht_enabled'] %>,
-    "download-dir": "<%= scope['::transmission::params::home_dir'] %>/<%= scope['::transmission::download_dir'] %>",
-    "download-limit": 100,
-    "download-limit-enabled": 0,
-<% if scope['::transmission::download_queue_size'] -%>
-    "download-queue-enabled": true,
+    "download-dir": "<%= scope['::transmission::params::download_root'] %>/<%= scope['::transmission::download_dir'] %>",
+    "download-queue-enabled": <%= scope['::transmission::download_queue_enabled'] %>,
     "download-queue-size": <%= scope['::transmission::download_queue_size'] %>,
-<% else -%>
-    "download-queue-enabled": false,
-    "download-queue-size": 5,
-<% end -%>
     "encryption": <%= scope['::transmission::encryption'] %>,
-    "idle-seeding-limit": 30,
-    "idle-seeding-limit-enabled": false,
-<% if scope['::transmission::incomplete_dir'] -%>
-    "incomplete-dir": "<%= scope['::transmission::params::home_dir'] %>/<%= scope['::transmission::incomplete_dir'] %>",
-    "incomplete-dir-enabled": true,
-<% else -%>
-    "incomplete-dir": "<%= scope['::transmission::params::home_dir'] %>/<%= scope['::transmission::download_dir'] %>",
-    "incomplete-dir-enabled": false,
-<% end -%>
-    "lpd-enabled": false,
-    "max-peers-global": 200,
+    "incomplete-dir": "<%= scope['::transmission::params::download_root'] %>/<%= scope['::transmission::incomplete_dir'] %>",
+    "incomplete-dir-enabled": <%= scope['::transmission::incomplete_dir_enabled'] %>,
+    "idle-seeding-limit": <%= scope['::transmission::idle_seeding_limit'] %>,
+    "idle-seeding-limit-enabled": <%= scope['::transmission::idle_seeding_limit_enabled'] %>,
+    "lazy-bitfield-enabled": <%= scope['::transmission::lazy_bitfield_enabled'] %>,
+    "lpd-enabled": <%= scope['::transmission::lpd_enabled'] %>,
     "message-level": <%= scope['::transmission::message_level'] %>,
+<% if scope['::transmission::peer_congestion_algorithm'] -%>
+    "peer-congestion-algorithm": "<%= scope['::transmission::peer_congestion_algorithm'] %>",
+<% else -%>
     "peer-congestion-algorithm": "",
-    "peer-id-ttl-hours": 6,
-    "peer-limit-global": 200,
-    "peer-limit-per-torrent": 50,
+<% end -%>
+    "peer-id-ttl-hours": <%= scope['::transmission::peer_id_ttl_hours'] %>,
+    "peer-limit-global": <%= scope['::transmission::peer_limit_global'] %>,
+    "peer-limit-per-torrent": <%= scope['::transmission::peer_limit_per_torrent'] %>,
     "peer-port": <%= scope['::transmission::peer_port'] %>,
     "peer-port-random-high": <%= scope['::transmission::peer_port_random_high'] %>,
     "peer-port-random-low": <%= scope['::transmission::peer_port_random_low'] %>,
-    "peer-port-random-on-start": false,
-    "peer-socket-tos": "default",
+    "peer-port-random-on-start": <%= scope['::transmission::peer_port_random_on_start'] %>,
+    "peer-socket-tos": "<%= scope['::transmission::peer_socket_tos'] %>",
     "pex-enabled": <%= scope['::transmission::pex_enabled'] %>,
-    "port-forwarding-enabled": false,
-    "preallocation": 1,
-    "prefetch-enabled": 1,
-    "queue-stalled-enabled": true,
-    "queue-stalled-minutes": 30,
-<% if scope['::transmission::ratio_limit'] -%>
+    "port-forwarding-enabled": <%= scope['::transmission::port_forwarding_enabled'] %>,
+    "preallocation": <%= scope['::transmission::preallocation'] %>,
+    "prefetch-enabled": <%= scope['::transmission::prefetch_enabled'] %>,
+    "queue-stalled-enabled": <%= scope['::transmission::queue_stalled_enabled'] %>,
+    "queue-stalled-minutes": <%= scope['transmission::queue_stalled_minutes'] %>,
     "ratio-limit": <%= scope['::transmission::ratio_limit'] %>,
-    "ratio-limit-enabled": true,
+    "ratio-limit-enabled": <%= scope['::transmission::ratio_limit_enabled'] %>,
+    "rename-partial-files": <%= scope['::transmission::rename_partial_files'] %>,
+    "rpc-authentication-required": <%= scope['::transmission::rpc_authentication_required'] %>,
+    "rpc-url": "<%= scope['::transmission::rpc_url'] %>",
+    "rpc-bind-address": "<%= scope['::transmission::params::rpc_bind_address'] %>",
+    "rpc-enabled": <%= scope['::transmission::rpc_enabled'] %>,
+<% if scope['::transmission::rpc-host-whitelist'] -%>
+    "rpc-host-whitelist": "<%= scope['::transmission::rpc_host_whitelist'] %>",
 <% else -%>
-    "ratio-limit": 2,
-    "ratio-limit-enabled": false,
+    "rpc-host-whitelist": "",
 <% end -%>
-    "rename-partial-files": true,
-    "rpc-authentication-required": <%= scope['::transmission::rpc_enable_auth'] %>,
-    "rpc-bind-address": "<%= scope['::transmission::params::rpc_bind'] %>",
-    "rpc-enabled": true,
-<% if scope['::transmission::rpc_password'] -%>
+    "rpc-host-whitelist-enabled": <%= scope['::transmission::rpc_host_whitelist_enabled'] %>,
     "rpc-password": "<%= scope['::transmission::rpc_password'] %>",
-<% else -%>
-    "rpc-password": "{934145379c329831675007802bf4e43dc0ebd677BCqMicmZ",
-<% end -%>
     "rpc-port": <%= scope['::transmission::rpc_port'] %>,
-    "rpc-url": "<%= scope['::transmission::rpc_base_url'] %>",
     "rpc-username": "<%= scope['::transmission::rpc_username'] %>",
-<% if scope['::transmission::rpc_whitelist'] -%>
-    "rpc-whitelist": "127.0.0.1,<%= scope['::transmission::rpc_whitelist'] %>",
-    "rpc-whitelist-enabled": true,
+    "rpc-whitelist": "<%= scope['::transmission::rpc_whitelist'] %>",
+    "rpc-whitelist-enabled": <%= scope['::transmission::rpc_whitelist_enabled'] %>,
+    "scrape-paused-torrents-enabled": <%= scope['::transmission::scrape_paused_torrents_enabled'] %>,
+    "script-torrent-done-enabled": <%= scope['::transmission::script_torrent_done_enabled'] %>,
+<% if scope['::transmission::script_torrent_done_filename'] -%>
+    "script-torrent-done-filename": "<%= scope['::transmission::script_torrent_done_filename'] %>",
 <% else -%>
-    "rpc-whitelist": "127.0.0.1",
-    "rpc-whitelist-enabled": false,
-<% end -%>
-    "scrape-paused-torrents-enabled": true,
-<% if scope['::transmission::script_done_filename'] -%>
-    "script-torrent-done-enabled": true,
-    "script-torrent-done-filename": "<%= scope['::transmission::script_done_filename'] %>",
-<% else -%>
-    "script-torrent-done-enabled": false,
     "script-torrent-done-filename": "",
 <% end -%>
-    "seed-queue-enabled": false,
-    "seed-queue-size": 10,
-<% if scope['::transmission::speed_limit_down'] -%>
+    "start-added-torrents": <%= scope['::transmission::start_added_torrents'] %>,
     "speed-limit-down": <%= scope['::transmission::speed_limit_down'] %>,
-    "speed-limit-down-enabled": true,
-<% else -%>
-    "speed-limit-down": 100,
-    "speed-limit-down-enabled": false,
-<% end -%>
-<% if scope['::transmission::speed_limit_up'] -%>
+    "speed-limit-down-enabled": <%= scope['::transmission::speed_limit_down_enabled'] %>,
     "speed-limit-up": <%= scope['::transmission::speed_limit_up'] %>,
-    "speed-limit-up-enabled": true,
-<% else -%>
-    "speed-limit-up": 100,
-    "speed-limit-up-enabled": false,
-<% end -%>
-    "start-added-torrents": true,
-    "trash-original-torrent-files": false,
-    "umask": 18,
-    "upload-limit": 100,
-    "upload-limit-enabled": 0,
-    "upload-slots-per-torrent": 14,
-    "utp-enabled": <%= scope['::transmission::utp_enabled'] %>
+    "speed-limit-up-enabled": <%= scope['::transmission::speed_limit_up_enabled'] %>,
+    "seed-queue-enabled": <%= scope['::transmission::seed_queue_enabled'] %>,
+    "seed-queue-size": <%= scope['::transmission::seed_queue_size'] %>,
+    "trash-original-torrent-files": <%= scope['::transmission::trash_original_torrent_files'] %>,
+    "umask": <%= scope['::transmission::umask'] %>,
+    "upload-slots-per-torrent": <%= scope['::transmission::upload_slots_per_torrent'] %>,
+    "utp-enabled": <%= scope['::transmission::utp_enabled'] %>,
+    "watch-dir": "<%= scope['::transmission::params::download_root'] %>/<%= scope['::transmission::watch_dir'] %>",
+    "watch-dir-enabled": <%= scope['::transmission::watch_dir_enabled'] %>
 }
