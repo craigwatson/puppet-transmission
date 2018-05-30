@@ -20,7 +20,7 @@ class transmission (
   String                 $service_ensure                 = 'running',
   Boolean                $service_enable                 = true,
   Boolean                $manage_ppa                     = true,
-  Variant[Undef,String]  $download_root                  = '/var/lib/transmission-daemon',
+  Variant[Undef,String]  $download_root                  = undef,
   Variant[Undef,String]  $log_file                       = undef,
 
 
