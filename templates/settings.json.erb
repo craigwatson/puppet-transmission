@@ -47,9 +47,9 @@
     "rename-partial-files": <%= scope['::transmission::rename_partial_files'] %>,
     "rpc-authentication-required": <%= scope['::transmission::rpc_authentication_required'] %>,
     "rpc-url": "<%= scope['::transmission::rpc_url'] %>",
-    "rpc-bind-address": "<%= scope['::transmission::params::rpc_bind_address'] %>",
+    "rpc-bind-address": "<%= scope['::transmission::rpc_bind_address'] %>",
     "rpc-enabled": <%= scope['::transmission::rpc_enabled'] %>,
-<% if scope['::transmission::rpc-host-whitelist'] -%>
+<% if scope['::transmission::rpc_host_whitelist'] -%>
     "rpc-host-whitelist": "<%= scope['::transmission::rpc_host_whitelist'] %>",
 <% else -%>
     "rpc-host-whitelist": "",
