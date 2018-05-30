@@ -79,7 +79,7 @@ class transmission (
   Boolean                $rpc_whitelist_enabled          = true,
   Boolean                $scrape_paused_torrents_enabled = true,
   Boolean                $script_torrent_done_enabled    = false,
-  Variante[Undef,String] $script_torrent_done_filename   = undef,
+  Variant[Undef,String]  $script_torrent_done_filename   = undef,
   Boolean                $start_added_torrents           = true,
   Integer                $speed_limit_down               = 100,
   Boolean                $speed_limit_down_enabled       = false,
