@@ -22,7 +22,7 @@ class transmission (
   Boolean                $manage_ppa                     = true,
   Variant[Undef,String]  $download_root                  = undef,
   Variant[Undef,String]  $log_file                       = undef,
-
+  String                 $home_dir                       = undef,
 
   Integer                $alt_speed_down                 = 50,
   Boolean                $alt_speed_enabled              = false,

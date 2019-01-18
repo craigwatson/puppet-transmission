@@ -17,23 +17,20 @@
 #
 class transmission::config {
 
-  # == Defaults
-
-  File {
-    owner   => 'debian-transmission',
-    group   => 'debian-transmission',
-    require => Package[$::transmission::params::packages],
-  }
-
   # == Transmission config
 
   file { '/etc/transmission-daemon':
-    ensure => directory,
-    mode   => '0770',
+    ensure  => 'directory',
+    owner   => $::transmission::owner,
+    group   => $::transmission::group,
+    mode    => '0770',
+    require => Package['transmission-daemon'],
   }
 
   file { '/etc/transmission-daemon/settings.json.puppet':
-    ensure  => file,
+    ensure  => 'file',
+    owner   => $::transmission::owner,
+    group   => $::transmission::group,
     mode    => '0600',
     content => template('transmission/settings.json.erb'),
     require => File['/etc/transmission-daemon'],
@@ -42,19 +39,35 @@ class transmission::config {
   # == Transmission Home
 
   file { $::transmission::params::home_dir:
-    ensure => directory,
-    mode   => '0770',
+    ensure  => 'directory',
+    owner   => $::transmission::owner,
+    group   => $::transmission::group,
+    mode    => '0770',
+    require => Package['transmission-daemon'],
   }
 
-  file { "${::transmission::params::home_dir}/settings.json":
-    ensure  => link,
-    target  => '/etc/transmission-daemon/settings.json',
-    require => File[$::transmission::params::home_dir],
+  if $::transmission::params::download_root != $::transmission::params::home_dir {
+    file { $::transmission::params::download_root:
+      ensure  => 'directory',
+      owner   => $::transmission::owner,
+      group   => $::transmission::group,
+      mode    => '0770',
+      require => Package['transmission-daemon'],
+    }
   }
 
   file { $::transmission::params::download_dirs:
-    ensure => directory,
-    mode   => '0770',
+    ensure  => 'directory',
+    owner   => $::transmission::owner,
+    group   => $::transmission::group,
+    mode    => '0770',
+    require => File[$::transmission::params::download_root]
+  }
+
+  file { "${::transmission::params::home_dir}/settings.json":
+    ensure  => 'link',
+    target  => '/etc/transmission-daemon/settings.json',
+    require => File[$::transmission::params::home_dir],
   }
 
   # == Blocklist update cron

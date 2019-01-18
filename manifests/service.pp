@@ -26,7 +26,7 @@ class transmission::service {
 
     file { '/etc/systemd/system/transmission-daemon.service':
       ensure  => file,
-      require => Package[$::transmission::params::packages],
+      require => Package['transmission-daemon'],
       content => template('transmission/systemd.erb'),
       notify  => Exec['transmission_systemctl_daemon_reload'],
     }

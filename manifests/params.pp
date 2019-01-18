@@ -1,19 +1,33 @@
 class transmission::params {
 
-  $packages = [
-    'transmission-cli',
-    'transmission-common',
-    'transmission-daemon',
-  ]
+  if $::transmission::home_dir != undef {
+    $home_dir = $::transmission::home_dir
+  } else {
+    if versioncmp($facts['os']['release']['full'],'16.04') >= 0 {
+      $home_dir = '/var/lib/transmission-daemon'
+    } else {
+      $home_dir = '/home/debian-transmission'
+    }
+  }
+
+  if $::transmission::download_root != undef {
+    $download_root = $::transmission::download_root
+  } else {
+    $download_root = $home_dir
+  }
+
+  $download_dirs = unique([
+    "${download_root}/${::transmission::download_dir}",
+    "${download_root}/${::transmission::incomplete_dir}",
+    "${download_root}/${::transmission::watch_dir}"
+  ])
 
   if versioncmp($facts['os']['release']['full'],'16.04') >= 0 {
     $use_systemd = true
-    $home_dir    = '/home/debian-transmission'
     $stop_cmd    = '/bin/systemctl stop transmission-daemon'
     $start_cmd   = '/bin/systemctl start transmission-daemon'
   } else {
     $use_systemd = false
-    $home_dir    = '/var/lib/transmission-daemon'
     $stop_cmd    = '/usr/sbin/service transmission-daemon stop'
     $start_cmd   = '/usr/sbin/service transmission-daemon start'
   }
@@ -23,16 +37,6 @@ class transmission::params {
   } else {
     $rpc_bind = $::transmission::bind_address_ipv4
   }
-
-  if $::transmission::download_root != undef {
-    $download_root = $::transmission::download_root
-  } else {
-    $download_root = $home_dir
-  }
-
-  $download_dirs = unique(["${download_root}/${::transmission::download_dir}",
-                          "${download_root}/${::transmission::incomplete_dir}",
-                          "${download_root}/${::transmission::watch_dir}"])
 
   if $::transmission::service_ensure != 'running' {
     $cron_ensure = absent
