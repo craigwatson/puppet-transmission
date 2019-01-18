@@ -1,5 +1,7 @@
 class transmission::params {
 
+  $rpc_url = regsubst($::transmission::rpc_url,'/$','')
+
   if $::transmission::home_dir != undef {
     $home_dir = $::transmission::home_dir
   } else {
@@ -47,9 +49,9 @@ class transmission::params {
   }
 
   if $::transmission::rpc_authentication_required == true {
-    $remote_command_auth = " -n ${::transmission::rpc_username}:${::transmission::rpc_password}"
+    $remote_command = "/usr/bin/transmission-remote http://localhost:${::transmission::rpc_port}${rpc_url} -n ${::transmission::rpc_username}:${::transmission::rpc_password}"
   } else {
-    $remote_command_auth = ' '
+    $remote_command = "/usr/bin/transmission-remote http://localhost:${::transmission::rpc_port}${rpc_url}"
   }
 
 }
