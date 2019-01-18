@@ -23,6 +23,8 @@ class transmission (
   Variant[Undef,String]  $download_root                  = undef,
   Variant[Undef,String]  $log_file                       = undef,
   Variant[Undef,String]  $home_dir                       = undef,
+  String                 $owner                          = 'debian-transmission',
+  String                 $group                          = 'debian-transmission',
 
   Integer                $alt_speed_down                 = 50,
   Boolean                $alt_speed_enabled              = false,
