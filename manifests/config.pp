@@ -74,7 +74,7 @@ class transmission::config {
 
   cron { 'transmission_update_blocklist':
     ensure  => $::transmission::params::cron_ensure,
-    command => "/usr/bin/transmission-remote${::transmission::params::remote_command_auth} --blocklist-update > /dev/null",
+    command => "/usr/bin/transmission-remote http://localhost:${::transmission::rpc_port}${::transmission::rpc_url} ${::transmission::params::remote_command_auth} --blocklist-update > /dev/null",
     require => Package['transmission-cli','transmission-common','transmission-daemon'],
     user    => 'root',
     minute  => '0',
